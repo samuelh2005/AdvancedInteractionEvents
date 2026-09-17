@@ -14,7 +14,7 @@ import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-public class SecretCommandEvent extends EventHandlerType<SecretCommandEvent.SecretCommandData> implements ClickActionHandler<SecretCommandEvent.SecretCommandData> {
+public class SecretCommandHandler extends EventHandlerType<SecretCommandHandler.SecretCommandData> implements ClickActionHandler<SecretCommandHandler.SecretCommandData> {
     public static final MapCodec<SecretCommandData> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
         Codec.STRING.fieldOf("command").forGetter(SecretCommandData::command)
     ).apply(instance, SecretCommandData::new));
@@ -22,7 +22,7 @@ public class SecretCommandEvent extends EventHandlerType<SecretCommandEvent.Secr
     public static record SecretCommandData(String command) implements EventData {
         @Override
         public EventHandlerType<? extends EventData> getType() {
-            return BuiltinEventHandlers.SECRET_COMMAND_EVENT;
+            return BuiltinEventHandlers.SECRET_COMMAND;
         }
     }
 
