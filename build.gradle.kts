@@ -1,5 +1,6 @@
 plugins {
 	id("net.fabricmc.fabric-loom")
+	id("me.modmuss50.mod-publish-plugin") version "2.2.0"
 	`maven-publish`
 }
 
@@ -67,4 +68,22 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+publishMods {
+	file.set(tasks.jar.flatMap { it.archiveFile })
+    changelog.set(file("docs/changelog/"+providers.gradleProperty("version").get()+".md").readText())
+    type.set(STABLE)
+    modLoaders.add("fabric")
+
+    modrinth {
+        projectId.set("bSQ5escX")
+        accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
+        minecraftVersions.add(providers.gradleProperty("minecraft_version").get())
+    }
+    github {
+        repository.set("samuelh2005/AdvancedInteractionEvents")
+        accessToken.set(providers.environmentVariable("GITHUB_TOKEN"))
+        commitish.set("main")
+    }
 }
