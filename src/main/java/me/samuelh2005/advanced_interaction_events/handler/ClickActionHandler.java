@@ -1,6 +1,6 @@
-package me.samuelh2005.advanced_interaction_events.events;
+package me.samuelh2005.advanced_interaction_events.handler;
 
-import me.samuelh2005.advanced_interaction_events.handler.EventData;
+import me.samuelh2005.advanced_interaction_events.event.EventData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 

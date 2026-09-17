@@ -6,8 +6,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import me.samuelh2005.advanced_interaction_events.AdvancedInteractionEvents;
-import me.samuelh2005.advanced_interaction_events.events.ClickActionHandler;
-import me.samuelh2005.advanced_interaction_events.handler.EventData;
+import me.samuelh2005.advanced_interaction_events.event.EventData;
+import me.samuelh2005.advanced_interaction_events.handler.ClickActionHandler;
 import me.samuelh2005.advanced_interaction_events.handler.EventHandlerType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;

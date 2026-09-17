@@ -1,7 +1,7 @@
 package me.samuelh2005.advanced_interaction_events.builtin;
 
 import me.samuelh2005.advanced_interaction_events.AdvancedInteractionEvents;
-import me.samuelh2005.advanced_interaction_events.handler.EventData;
+import me.samuelh2005.advanced_interaction_events.event.EventData;
 import me.samuelh2005.advanced_interaction_events.handler.EventHandlerType;
 import net.minecraft.core.Registry;
 

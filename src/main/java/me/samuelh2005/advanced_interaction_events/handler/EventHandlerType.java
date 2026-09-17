@@ -4,6 +4,7 @@ import com.mojang.serialization.Lifecycle;
 import com.mojang.serialization.MapCodec;
 
 import me.samuelh2005.advanced_interaction_events.AdvancedInteractionEvents;
+import me.samuelh2005.advanced_interaction_events.event.EventData;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
