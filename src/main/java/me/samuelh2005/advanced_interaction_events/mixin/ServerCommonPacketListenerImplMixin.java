@@ -17,29 +17,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import me.samuelh2005.advanced_interaction_events.AdvancedInteractionEvents;
 import me.samuelh2005.advanced_interaction_events.event.EventData;
 import me.samuelh2005.advanced_interaction_events.handler.ClickActionHandler;
 import me.samuelh2005.advanced_interaction_events.handler.EventHandlerType;
+import me.samuelh2005.advanced_interaction_events.network.UserEventPayload;
 
 @Mixin(ServerCommonPacketListenerImpl.class)
 public class ServerCommonPacketListenerImplMixin {
-    public static final Identifier CUSTOM_CLICK_EVENT = AdvancedInteractionEvents.id("custom_click_event");
-
-    public static record CustomClickActionPayload(Identifier id, EventData payload) {
-        public static final Codec<CustomClickActionPayload> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Identifier.CODEC.fieldOf("id").forGetter(CustomClickActionPayload::id),
-            EventData.CODEC.fieldOf("payload").forGetter(CustomClickActionPayload::payload)
-        ).apply(instance, CustomClickActionPayload::new));
-    }
-
     @Inject(method = "handleCustomClickAction", at = @At("TAIL"))
     private void onCustomClickAction(ServerboundCustomClickActionPacket packet, CallbackInfo ci) {
-        if (packet.id() == CUSTOM_CLICK_EVENT || !(this instanceof ServerPlayerConnection connection)) {
+        if (packet.id() == UserEventPayload.USER_EVENT || !(this instanceof ServerPlayerConnection connection)) {
             return;
         }
 
@@ -49,9 +39,9 @@ public class ServerCommonPacketListenerImplMixin {
 
         if (payload.isPresent()) {
             Tag tag = payload.get();
-            DataResult<CustomClickActionPayload> result = CustomClickActionPayload.CODEC.parse(NbtOps.INSTANCE, tag);
+            DataResult<UserEventPayload> result = UserEventPayload.CODEC.parse(NbtOps.INSTANCE, tag);
 
-            Optional<CustomClickActionPayload> optionalPayload = result.resultOrPartial(AdvancedInteractionEvents.LOGGER::error);
+            Optional<UserEventPayload> optionalPayload = result.resultOrPartial(AdvancedInteractionEvents.LOGGER::error);
             optionalPayload.ifPresent(customClickActionPayload -> {
                 Identifier id = customClickActionPayload.id();
                 EventData eventData = customClickActionPayload.payload();
