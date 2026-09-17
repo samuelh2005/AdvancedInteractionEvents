@@ -11,4 +11,8 @@ public class BuiltinEventHandlers {
     private static <T extends EventHandlerType<? extends EventData>> T register(String name, T eventHandlerType) {
         return Registry.register(EventHandlerType.REGISTRY, AdvancedInteractionEvents.id(name), eventHandlerType);
     }
+
+    public static void register() {
+        // Do nothing apart from initialise statics.
+    }
 }
