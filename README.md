@@ -4,9 +4,9 @@ A Minecraft library for registering and handling custom interaction events, incl
 
 ## Features
 
-1. Flexible event handler types using the `EventHandlerType` registry.
-2. Codec-based `EventData` serialisation for user specified event data.
-3. Server-side handling for custom click-action packets, allowing registered event handlers to receive decoded click events for a player.
+1. Flexible event handler types using the `EventHandlerType` registry, *preventing event handler conflicts*.
+2. Codec-based `EventData` serialisation for user specified event data, *instead of manual NBT parsing*.
+3. Server-side event handler dispatch for custom click-action packets, *avoiding the need for hardcoded mixins*.
 
 ## Compatibility
 
