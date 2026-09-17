@@ -15,19 +15,4 @@ public abstract class EventHandlerType<T extends EventData> {
         AdvancedInteractionEvents.id("event_handlers")),
         Lifecycle.stable()
     );
-
-    /**
-     * Casts the given event data to the type associated with this EventHandlerType.
-     *
-     * @param eventData the event data to cast
-     * @return the casted event data
-     * @throws IllegalArgumentException if the event data is not of the expected type
-     */
-    @SuppressWarnings({ "unchecked", "hiding" }) // Safety: The cast is safe because the EventHandlerType is associated with the EventData class.
-    public <T extends EventData> T cast(EventData eventData) {
-        if (!eventData.getType().equals(this)) {
-            throw new IllegalArgumentException("Event data type mismatch: expected " + this + ", got " + eventData.getType());
-        }
-        return (T) eventData;
-    }
 }

@@ -59,8 +59,13 @@ public class ServerCommonPacketListenerImplMixin {
                 Optional<Reference<EventHandlerType<?>>> eventHandlerTypeRef = EventHandlerType.REGISTRY.get(id);
                 if (eventHandlerTypeRef.isPresent()) {
                     EventHandlerType<? extends EventData> eventHandlerType = eventHandlerTypeRef.get().value();
-                    if (eventHandlerType instanceof ClickActionHandler clickActionHandler) {
-                        clickActionHandler.handleClickAction(server, player, eventData);
+                    if (eventData.getType() != eventHandlerType) {
+                        AdvancedInteractionEvents.LOGGER.error("Received custom click action packet with event type that does not match the expected type: {} from player: {}", id, player.getName().getString());
+                        return;
+                    }
+
+                    if (eventHandlerType instanceof ClickActionHandler<?> clickActionHandler) {
+                        handleClickAction(clickActionHandler, server, player, eventData);
                     } else {
                         AdvancedInteractionEvents.LOGGER.error("Received custom click action packet with event type that does not implement ClickActionHandler: {} from player: {}", id, player.getName().getString());
                     }
@@ -71,5 +76,11 @@ public class ServerCommonPacketListenerImplMixin {
         } else {
             AdvancedInteractionEvents.LOGGER.error("Received custom click action packet with no payload from player: {}", player.getName().getString());
         }
+    }
+
+    @SuppressWarnings("unchecked") // Safety: We check that the eventData type matches the clickActionHandler type before calling handleClickAction.
+    private static <T extends EventData> void handleClickAction(ClickActionHandler<T> clickActionHandler,
+            MinecraftServer server, ServerPlayer player, EventData eventData) {
+        clickActionHandler.handleClickAction(server, player, (T) eventData);
     }
 }
