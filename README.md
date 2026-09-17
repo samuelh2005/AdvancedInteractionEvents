@@ -8,6 +8,11 @@ A Minecraft library for registering and handling custom interaction events, incl
 2. Codec-based `EventData` serialisation for user specified event data, *instead of manual NBT parsing*.
 3. Server-side event handler dispatch for custom click-action packets, *avoiding the need for hardcoded mixins*.
 
+## Roadmap
+
+1. Add support for custom text click events.
+2. Allow entity interaction events to be registered and handled.
+
 ## Compatibility
 
 This library is compatible with Minecraft 26.2, Fabric Loader 0.19.5 or newer, and Java 25 or newer.
