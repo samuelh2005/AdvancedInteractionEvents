@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "me.samuelh2005.advanced_interaction_events.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"ServerCommonPacketListenerImplAccessor",
+		"ServerCommonPacketListenerImplMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

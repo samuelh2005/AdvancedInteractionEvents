@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "advanced_interaction_events",
+	"version": "${version}",
+	"name": "Advanced Interaction Events",
+	"description": "Library for mod authors to register custom dialog events, text click events, and entity interaction events-without manually messing with mixins and NBT data.",
+	"authors": [
+		"samuelh2005"
+	],
+	"contact": {
+		"homepage": "https://github.com/samuelh2005/AdvancedInteractionEvents",
+		"sources": "https://github.com/samuelh2005/AdvancedInteractionEvents",
+		"issues": "https://github.com/samuelh2005/AdvancedInteractionEvents/issues"
+	},
+	"license": "LGPL-3.0-or-later",
+	"icon": "assets/advanced_interaction_events/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"me.samuelh2005.advanced_interaction_events.AdvancedInteractionEvents"
+		]
+	},
+	"mixins": [
+		"advanced_interaction_events.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
