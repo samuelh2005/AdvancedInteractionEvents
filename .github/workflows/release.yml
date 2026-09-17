@@ -11,6 +11,8 @@ jobs:
       image: mcr.microsoft.com/openjdk/jdk:25-ubuntu
       options: --user root
     steps:
+      # Set gradle permissions to be executable
+      - run: chmod +x ./gradlew
       - uses: actions/checkout@v4
       - run: ./gradlew build publishMods
         env:
