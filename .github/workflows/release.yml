@@ -6,15 +6,21 @@ permissions:
  
 jobs:
   build:
-    runs-on: ubuntu-22.04
-    container:
-      image: mcr.microsoft.com/openjdk/jdk:25-ubuntu
-      options: --user root
+    runs-on: ubuntu-24.04
     steps:
-      # Set gradle permissions to be executable
-      - run: chmod +x ./gradlew
-      - uses: actions/checkout@v4
-      - run: ./gradlew build publishMods
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build and publish
+        run: ./gradlew build publishMods
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
